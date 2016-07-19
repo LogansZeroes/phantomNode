@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  h2 check the below urls
+  each url in urls
+    p #{url}
+  a.btn(href="/phantom") PhantomJS ACTIVATE!

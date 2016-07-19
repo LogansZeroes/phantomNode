@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  p Let's get started
+  form(action="upload", method="post", enctype="multipart/form-data")
+    input(type="file", name="urls")
+    input(type="submit", value="upload")

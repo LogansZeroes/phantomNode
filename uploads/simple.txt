@@ -1,0 +1,4 @@
+http://stage-knowledge.servicenow.com
+http://stage-www.servicenow.com
+http://stage-www.servicenow.com/products/studio.html
+http://stage-www.servicenow.com/resources.html
