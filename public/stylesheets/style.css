@@ -1,12 +1,60 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #25434d;
+  color: white;
+  display: inline-block;
+  width: 100%;
+  box-sizing:border-box;
 }
 
-a {
-  color: #00B7FF;
+ul {
+	margin-left: 30%;
+}
+
+h3 {
+	margin-left: 30%;
+}
+
+h1 {
+	text-align: center;
+    font-size: 4vw;
+}
+
+li {
+	text-align: left;
 }
 
 .btn {
-	font-size: 4vw;
+    background-color: #A61C33;
+    border: solid black;
+    color: white;
+    padding: 2% 6%;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 3vw;
+	width: 80%;
+	margin: 10% 0 4% 3%;
+}
+
+form {
+	border: 2px solid yellow;
+	min-width: 50vw;
+	min-height: 10vw;
+	display: inline-block;
+	margin: 0 20% 4% 20%;
+}
+
+form input {
+	font-size: 2vw;
+	text-align: center;
+	margin: 0 10% 0 10%;
+	padding: 2vw 0 2vw 0;
+	width: 100%;
+	display: block;
+}
+
+form .btn {
+	margin: 0 10% 4% 10%;
 }

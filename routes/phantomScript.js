@@ -8,13 +8,13 @@ var binPath = phantomjs.path;
 var fs = require('fs');
 var urls;
 
-// var theUrl ='http://stage-knowledge.servicenow.com';
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
   //get the file based off the date from upload.js
   var filePath = 'uploads/' + (new Date()).toString().match(/.+(2016)/)[0].replace(/\s/g, '').toLowerCase() + '.txt';
+  //write path for results
+  var writePath = 'results/results_from_' + (new Date()).toString().match(/.+(2016)/)[0].replace(/\s/g, '').toLowerCase() + '.txt';
 
   //read file to get the URLs to check
   fs.readFile(filePath, "utf-8", function (err, data) {
@@ -27,47 +27,24 @@ router.get('/', function(req, res, next) {
     for (var i = 0; i < urls.length; i++){
       childArgs = [
         path.join(__dirname, 'phantomStart.js'),
-        //first url is chosen
-        //EDIT TO RUN PHANTOM ONCE PER URL
         urls[i]
       ]
-
-      // childProcess.execFile(binPath, childArgs, function(err, stdout, stderr) {
-      //   if(err) console.log('error', err);
-      //   else console.log('stdout', stdout)
-      //   results.push(stdout);    
-      // })
 
       var data = childProcess.execFileSync(binPath, childArgs).toString().split('\n');
       console.log('the data', data)
       data.forEach(function(d){
         results.push(d);
       })
-      // results.push(data[0]);    
-      // results.push(data[1]);    
-      console.log('LOTS OF RESULTS?', results)
 
       if(i === urls.length-1) {
-        console.log('AT THE END', i)
-        console.log('final res', results.toString())
-        res.render('phantomPage', { title: 'Results Available', results: results});
+        fs.writeFileSync(writePath, results.join('\r\n'), 'utf-8', function (err, data) {
+          if (err) console.error('There was an error writing the results file:', err);
+          
+          // res.render('phantomPage', { title: 'Results Available', results: results});
+        })
+          res.render('phantomPage', { title: 'Results Available', results: results});
       }
     }
-    
-  //   var childArgs = [
-  //     path.join(__dirname, 'phantomStart.js'),
-  //     //first url is chosen
-  //     //EDIT TO RUN PHANTOM ONCE PER URL
-  //     urls[0]
-  //   ]
-     
-  //   childProcess.execFile(binPath, childArgs, function(err, stdout, stderr) {
-  //     if(err) console.log('error', err);
-  //     else console.log('stdout', stdout)    
-  //     res.render('phantomPage', { title: 'Results Available', url: urls[0], results: stdout});
-  //   })
-
-    // res.render('phantomPage', { title: 'Results Available', urls: urls, results: results});
   });
 
 });

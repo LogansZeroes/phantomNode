@@ -22,7 +22,7 @@ router.post('/', upload.single('urls'), function(req, res, next) {
 	src.on('end', function() { 
 		fs.readFile(target_path, "utf-8", function (err, data) {
 			var urls = data.split('\n');
-  			res.render('upload', { title: 'Upload Success', urls: urls});
+  			res.render('upload', { title: 'All Systems Ready', urls: urls});
 		});
 	});
 	src.on('error', function(err) { res.render('error'); });

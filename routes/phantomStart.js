@@ -134,24 +134,38 @@ function handleUrl(theUrl) {
 function endQA() {
     //no more setTimeouts
     removeTimers();
-    //remove all good/passing link clicks from qaResults
-    if(urlEvars.length && qaResults.length) {
-        for(var i = urlEvars.length-1; i >= 0; i--) {
-            for(var j = qaResults.length-1; j >= 0; j--){
-                if((new RegExp(urlEvars[i].replace('?', ''))).test(qaResults[j].replace('?', ''))){
-                    qaResults.splice(j, 1);
-                    break;
+
+    if(urlEvars.length > qaResults.length) {
+        console.log('CHECK URL AND TRY AGAIN :(\n******************************************************************************************************\n******************************************************************************************************');
+        phantom.exit();
+    }
+    else{
+        //remove all good/passing link clicks from qaResults
+        if(urlEvars.length > 0 && qaResults.length > 1) {
+            for(var i = urlEvars.length-1; i >= 0; i--) {
+                for(var j = qaResults.length-1; j >= 0; j--){
+                    if((new RegExp(urlEvars[i].replace('?', ''))).test(qaResults[j].replace('?', ''))){
+                        qaResults.splice(j, 1);
+                        break;
+                    }
                 }
             }
         }
+        //removing blank results from array
+        for(var k = qaResults.length-1; k >= 0; k--){
+            if(qaResults[k].length === 0){
+                qaResults.splice(k, 1);
+                break;
+            }
+        }
+        //output the URL checked
+        console.log(urlToCheck.toUpperCase());
+        var toWrite = ( urlEvars.length === 0 ? 'CHECK URL AND TRY AGAIN :(\n' : (qaResults.length === 0 ? 'Of ' + urlEvars.length + ' links checked ' + 'there were no issues!!' : 'Of ' + urlEvars.length + ' links checked, number of issues: ' + qaResults.length + '\ncheck links:\n' + qaResults.join(',\n')) ) + '\n******************************************************************************************************\n******************************************************************************************************';
+        //console log is how we are currently passing data to phantomScript.js to display on phantomPage.jade
+        console.log(toWrite);
+        //exit phantomjs
+        phantom.exit();
     }
-    //output the URL checked
-    console.log(urlToCheck.toUpperCase());
-    var toWrite = ( urlEvars.length === 0 ? 'URL IS BROKEN :(\n' : (qaResults.length === 0 ? 'Of ' + urlEvars.length + ' links checked ' + 'there were no issues!!' : 'Of ' + urlEvars.length + ' links checked, number of issues: ' + qaResults.length + '\ncheck links:\n' + qaResults.join(',\n')) ) + '\n*****************************************';
-    //console log is how we are currently passing data to phantomScript.js to display on phantomPage.jade
-    console.log(toWrite);
-    //exit phantomjs
-    phantom.exit();
 }
 //call main function with the URL
 handleUrl(urlToCheck);

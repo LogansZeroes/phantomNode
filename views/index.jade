@@ -2,7 +2,13 @@ extends layout
 
 block content
   h1= title
-  p Let's get started
+  ul
+    li Choose a txt file with a URL on each line
+    li Hit upload
+    li ???
+    li Profit
+  br
+
   form(action="upload", method="post", enctype="multipart/form-data")
-    input(type="file", name="urls")
-    input(type="submit", value="upload")
+    input(type="file", name="urls", required)
+    input(type="submit", value="upload", class="btn")
