@@ -4,7 +4,8 @@ var system = require('system');
 var path = require('path');
 var childProcess = require('child_process');
 var phantomjs = require('phantomjs');
-var binPath = phantomjs.path;
+//var binPath = phantomjs.path;
+var binPath = "C:\\MarTech\\Apps\\phantomjs-2.1.1-windows\\bin\\phantomjs"
 var fs = require('fs');
 var urls;
 
@@ -23,6 +24,8 @@ router.get('/', function(req, res, next) {
 
     var childArgs = [];
     var results = [];
+	
+	//console.log('bin path', binPath)
 
     for (var i = 0; i < urls.length; i++){
       childArgs = [
@@ -31,6 +34,7 @@ router.get('/', function(req, res, next) {
       ]
 
       var data = childProcess.execFileSync(binPath, childArgs).toString().split('\n');
+	  
       console.log('the data', data)
       data.forEach(function(d){
         results.push(d);

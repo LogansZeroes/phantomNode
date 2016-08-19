@@ -4,7 +4,7 @@ var phantom = require('node-phantom');
 
 //Initial page
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Analytics QA System' });
+  res.render('index', { title: 'Analytics QA System 2.0' });
 });
 
 module.exports = router;
