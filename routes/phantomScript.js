@@ -4,8 +4,8 @@ var system = require('system');
 var path = require('path');
 var childProcess = require('child_process');
 var phantomjs = require('phantomjs');
-//var binPath = phantomjs.path;
-var binPath = "C:\\MarTech\\Apps\\phantomjs-2.1.1-windows\\bin\\phantomjs"
+var binPath = phantomjs.path;
+// var binPath = "C:\\MarTech\\Apps\\phantomjs-2.1.1-windows\\bin\\phantomjs"
 var fs = require('fs');
 var urls;
 
@@ -13,9 +13,9 @@ var urls;
 router.get('/', function(req, res, next) {
 
   //get the file based off the date from upload.js
-  var filePath = 'uploads/' + (new Date()).toString().match(/.+(2016)/)[0].replace(/\s/g, '').toLowerCase() + '.txt';
+  var filePath = 'uploads/' + (new Date()).toString().match(/.+(2017)/)[0].replace(/\s/g, '').toLowerCase() + '.txt';
   //write path for results
-  var writePath = 'results/results_from_' + (new Date()).toString().match(/.+(2016)/)[0].replace(/\s/g, '').toLowerCase() + '.txt';
+  var writePath = 'results/results_from_' + (new Date()).toString().match(/.+(2017)/)[0].replace(/\s/g, '').toLowerCase() + '.txt';
 
   //read file to get the URLs to check
   fs.readFile(filePath, "utf-8", function (err, data) {

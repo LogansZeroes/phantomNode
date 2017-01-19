@@ -12,7 +12,7 @@ router.post('/', upload.single('urls'), function(req, res, next) {
 	//path for the uploaded file
  	var tmp_path = req.file.path;
  	//save to uploads folder with new name based on date
-	var target_path = 'uploads/' + (new Date()).toString().match(/.+(2016)/)[0].replace(/\s/g, '').toLowerCase() + '.txt';
+	var target_path = 'uploads/' + (new Date()).toString().match(/.+(2017)/)[0].replace(/\s/g, '').toLowerCase() + '.txt';
 	var src = fs.createReadStream(tmp_path);
 	var dest = fs.createWriteStream(target_path);
 	src.pipe(dest);

@@ -1,0 +1,2 @@
+http://stage-www.servicenow.com/customers.html
+http://stage-knowledge.servicenow.com
